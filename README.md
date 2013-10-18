@@ -1,4 +1,4 @@
-trux
+TRUX
 ====
 
 trux are programmable construction bots
