@@ -16,7 +16,7 @@ public class Geo {
 	
 	private double length;
 	
-	private Set<AbstractPlatform> platforms = new HashSet<AbstractPlatform>();
+	private Set<Platform> platforms = new HashSet<Platform>();
 	
 	public Geo(double length) {
 		this.length = length;
@@ -26,20 +26,20 @@ public class Geo {
 		return Math.random() * this.length;
 	}
 	
-	protected void spawn(AbstractPlatform platform) {
+	protected void spawn(Platform platform) {
 		this.platforms.add(platform);
 	}
 	
-	protected void kill(AbstractPlatform platform) {
+	protected void kill(Platform platform) {
 		this.platforms.remove(platform);
 	}
 	
 	/**
 	 * select all platforms within range x1..x2
 	 */
-	protected List<AbstractPlatform> select(double x1, double x2) {
-		List<AbstractPlatform> res = new LinkedList<AbstractPlatform>();
-		for(AbstractPlatform p: this.platforms) {
+	protected List<Platform> select(double x1, double x2) {
+		List<Platform> res = new LinkedList<Platform>();
+		for(Platform p: this.platforms) {
 			if (p.getX() >= x1 && p.getX() < x2) res.add(p);
 		}
 		return res;
@@ -71,7 +71,7 @@ public class Geo {
 		double step = this.length / this.LINE_WIDTH;
 		double x = 0;
 		while (x < this.length) {
-			List<AbstractPlatform> platformList = this.select(x, x + step);
+			List<Platform> platformList = this.select(x, x + step);
 			if (platformList.size() > 0) {
 				// represent as a team number of the first element
 				int team = platformList.get(0).getTeam();
