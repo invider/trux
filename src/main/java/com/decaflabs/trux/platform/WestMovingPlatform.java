@@ -3,7 +3,7 @@ package com.decaflabs.trux.platform;
 /**
  * Just a platform that always moves west at fixed speed
  */
-public class WestMovingPlatform extends Platform {
+public class WestMovingPlatform extends AbstractPlatform {
 
 	private static final double SPEED = 0.5d;
 	

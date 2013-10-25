@@ -1,6 +1,6 @@
 package com.decaflabs.trux.platform;
 
-public class StandingPlatform extends Platform {
+public class StandingPlatform extends AbstractPlatform {
 	
 	public StandingPlatform(int team, double x) {
 		super(team);

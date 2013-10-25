@@ -1,40 +1,15 @@
 package com.decaflabs.trux.platform;
 
-/**
- * Represents any movable and stationary object
- */
-public abstract class Platform {
+public interface Platform {
 	
-	protected int team = 0;
+	public int getTeam();
 	
-	protected double x, y;
+	public double getX();
+	public void setX(double x);
 	
-	public Platform() {}
+	public double getY();
+	public void setY(double y);
 	
-	public Platform(int team) {
-		this.team = team;
-	}
+	public void mutate(double d);
 	
-	public int getTeam() {
-		return team;
-	}
-	
-	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-	
-	public abstract void mutate(double delta); 
-		
 }
