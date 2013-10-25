@@ -12,7 +12,7 @@ import com.decaflabs.trux.platform.Platform;
  */
 public class Geo {
 	
-	private static final int LINE_WIDTH = 80;
+	private static final int LINE_WIDTH = 120;
 	
 	private double length;
 	
@@ -60,12 +60,16 @@ public class Geo {
 		}
 	}
 	
+	/**
+	 * get carriage return string to erase previous Geo print
+	 */
 	public String erase() {
-		StringBuilder buf = new StringBuilder("");
-		for (int i = 0; i < this.LINE_WIDTH; i++) buf.append('\b');
-		return buf.toString();
+		return "\r";
 	}
 	
+	/**
+	 * get Geo string representation
+	 */
 	public String toString() {
 		StringBuilder buf = new StringBuilder("");
 		double step = this.length / this.LINE_WIDTH;
