@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.decaflabs.trux.platform.Platform;
+import com.decaflabs.trux.platform.capsule.Capsule;
 
 /**
  * Represents the planet surface with all objects
@@ -40,6 +41,7 @@ public class Geo {
 	protected List<Platform> select(double x1, double x2) {
 		List<Platform> res = new LinkedList<Platform>();
 		for(Platform p: this.platforms) {
+			if (p instanceof Capsule && ((Capsule)p).isCaptured()) continue;			
 			if (p.getX() >= x1 && p.getX() < x2) res.add(p);
 		}
 		return res;
