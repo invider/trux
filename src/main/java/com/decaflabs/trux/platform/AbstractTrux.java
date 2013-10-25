@@ -8,7 +8,13 @@ import com.decaflabs.trux.platform.capsule.Capsule;
 
 public abstract class AbstractTrux extends AbstractPlatform {
 	
+	public static final double TRUX_WIDTH = 0.5d;
+	
 	protected List<Capsule> capsules = new LinkedList<Capsule>();
+	
+	public AbstractTrux(int team) {
+		super(team);
+	}
 	
 	@Override
 	public void mutate(double delta) {
@@ -18,8 +24,9 @@ public abstract class AbstractTrux extends AbstractPlatform {
 		}
 	}
 	
-	public void capture(AbstractCapsule capsule) {
+	public void capture(Capsule capsule) {		
 		this.capsules.add(capsule);
+		capsule.setHost(this);
 	}
 	
 	public void release(AbstractCapsule capsule) {

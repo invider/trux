@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import com.decaflabs.trux.platform.AbstractTrux;
 import com.decaflabs.trux.platform.Platform;
 import com.decaflabs.trux.platform.capsule.Capsule;
 
@@ -59,6 +60,23 @@ public class Geo {
 		for (Platform p: this.platforms) {
 			if (p.getX() > this.length) p.setX(0);
 			else if (p.getX() < 0) p.setX(this.length);
+		}
+		// collision detection
+		for (Platform t: this.platforms) {
+			if (t instanceof AbstractTrux) {				
+				AbstractTrux trux = (AbstractTrux) t;
+				for (Platform c: this.platforms) {
+					if (c instanceof Capsule) {
+						Capsule capsule = (Capsule)c;
+						if (capsule.getY() == 0
+								&& trux.getX() - AbstractTrux.TRUX_WIDTH <= capsule.getX()
+								&& trux.getX() + AbstractTrux.TRUX_WIDTH >= capsule.getX()) {
+							// collision! 
+							trux.capture(capsule);
+						}
+					}
+				}
+			}
 		}
 	}
 	
