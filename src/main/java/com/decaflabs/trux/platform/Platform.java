@@ -10,6 +10,6 @@ public interface Platform {
 	public double getY();
 	public void setY(double y);
 	
-	public void mutate(double d);
+	public void mutate(double delta);
 	
 }

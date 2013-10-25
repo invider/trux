@@ -78,9 +78,12 @@ public class Geo {
 			List<Platform> platformList = this.select(x, x + step);
 			if (platformList.size() > 0) {
 				// represent as a team number of the first element
-				int team = platformList.get(0).getTeam();
-				if (team == 0) buf.append('X');
-				else buf.append("" + team);
+				Platform platform = platformList.get(0);
+				if (platform.getY() == 0) {
+					int team = platform.getTeam();
+					if (team == 0) buf.append('X');
+					else buf.append("" + team);
+				}
 			} else {
 				buf.append('_');
 			}
