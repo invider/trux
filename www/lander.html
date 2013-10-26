@@ -1,0 +1,104 @@
+<html>
+ <head>
+    <title>Lander</title>
+     
+    <link rel="stylesheet" type="text/css" href="layer.css" />
+    
+	<script type="text/javascript" src="render.js"></script>    
+    
+    <script type="text/javascript">
+
+        var fps = 0;
+        var frameCounter = 0;
+        var frameSampleTime = 0;
+        var lastFrame = Date.now();    
+        var posx = 0, posy = 0;
+        var speed = 40;
+    
+        function init() {
+            load();
+            //setInterval(this.loop, 0);
+            setInterval(this.loop, 33);
+    
+            // setup canvas size
+            //canvas = document.getElementById("canvas");            
+            //canvas.width = document.body.clientWidth * 0.9; //document.width is obsolete
+            //canvas.height = document.body.clientHeight * 0.9; //document.height is obsolete
+            //canvas.x = 0;
+            //canvas.y = 0;
+            //canvas.width  = window.innerWidth * 0.5;
+            //canvas.height = window.innerHeight * 0.5; 
+            
+            var sound = new Audio("sound/FX-Shot443.mp3"); // buffers automatically when created
+            sound.play();
+        }
+        
+        function load() {
+        }
+        
+        function update(d) {
+            //posx += 0.1;        
+        }      
+
+        // Handle keyboard controls
+        var keysDown = {};
+
+        addEventListener("keydown", function (e) {
+	           keysDown[e.keyCode] = true;
+        }, false);
+
+        addEventListener("keyup", function (e) {
+	           delete keysDown[e.keyCode];
+        }, false);
+
+        
+        function handle(d) {
+	       if (38 in keysDown) {
+		      posy -= speed * d;
+	       }
+	       if (40 in keysDown) {
+		      posy += speed * d;
+	       }
+	       if (37 in keysDown) {
+		      posx -= speed * d;
+	       }
+	       if (39 in keysDown) {
+		      posx += speed * d;
+	       }
+        }
+        
+        function loop() {
+            var now = Date.now();
+	        var delta = (now - lastFrame) / 1000;            
+            frameSampleTime += delta;
+            frameCounter++;            
+            if (frameSampleTime >= 1) {
+                frameSampleTime -= 1;
+                fps = frameCounter;
+                frameCounter = 0;
+            }          
+            
+            handle(delta);
+            update(delta);            
+            render(delta);            
+            lastFrame = now;
+        }
+        
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+    
+  <body bgcolor="#000000" onload="init();">
+  
+    <canvas id="canvas" width="800" height="600" style="border:2px solid #002040;"></canvas>
+      
+    <audio id="background_player" autoplay loop>
+        <source src="sound/flex_beat.mp3" type="audio/mp3">
+        <source src="sound/flex_beat.ogg"type="audio/ogg">
+        Audio is not supported by your browser!
+    </audio>
+        
+  </body>
+</html>
