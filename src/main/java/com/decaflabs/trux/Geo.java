@@ -8,6 +8,7 @@ import java.util.Set;
 import com.decaflabs.trux.platform.AbstractTrux;
 import com.decaflabs.trux.platform.Platform;
 import com.decaflabs.trux.platform.capsule.Capsule;
+import com.decaflabs.trux.site.Site;
 
 /**
  * Represents the planet surface with all objects
@@ -19,6 +20,8 @@ public class Geo {
 	private double length;
 	
 	private Set<Platform> platforms = new HashSet<Platform>();
+	
+	private Set<Site> sites = new HashSet<Site>();
 	
 	public Geo(double length) {
 		this.length = length;
