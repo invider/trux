@@ -18,4 +18,7 @@ public class WestMovingPlatform extends AbstractTrux {
 		this.setX(this.getX() - this.SPEED * delta);
 	}
 
+	public double getSpeed(){
+	    return SPEED;
+	}
 }

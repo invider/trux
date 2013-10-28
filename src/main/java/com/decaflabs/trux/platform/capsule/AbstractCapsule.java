@@ -42,5 +42,12 @@ public abstract class AbstractCapsule extends AbstractPlatform implements Capsul
 			if (this.y < 0) this.y = 0;
 		}
 	}
+	
+	public String toString() {
+	    StringBuffer buf = new StringBuffer();
+	    buf.append(this.getClass().getSimpleName());
+        buf.append(String.format("; pos=(%1$.1f, %2$.1f)",this.getX(), this.getY()));
+        return buf.toString();
+	}
 
 }
