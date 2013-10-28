@@ -12,6 +12,8 @@ public abstract class AbstractTrux extends AbstractPlatform {
 	
 	protected List<Capsule> capsules = new LinkedList<Capsule>();
 	
+	protected Capsule released = null;
+	
 	public AbstractTrux(int team) {
 		super(team);
 	}
@@ -24,13 +26,15 @@ public abstract class AbstractTrux extends AbstractPlatform {
 		}
 	}
 	
-	public void capture(Capsule capsule) {		
+	public void capture(Capsule capsule) {
+		if (this.released == capsule) return; // ignore previously released capsule
 		this.capsules.add(capsule);
 		capsule.setHost(this);
 	}
 	
 	public void release(AbstractCapsule capsule) {
 		if (this.capsules.remove(capsule)) {
+			this.released = capsule;
 			capsule.release();
 		}
 	}
