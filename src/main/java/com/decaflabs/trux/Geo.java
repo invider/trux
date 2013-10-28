@@ -19,12 +19,15 @@ public class Geo {
 	
 	private double length;
 	
+	private Rain rain;
+	
 	private Set<Platform> platforms = new HashSet<Platform>();
 	
 	private Set<Site> sites = new HashSet<Site>();
 	
 	public Geo(double length) {
 		this.length = length;
+		this.rain = new Rain(length);
 	}
 	
 	protected double randomTag() {
@@ -80,6 +83,12 @@ public class Geo {
 					}
 				}
 			}
+		}
+		
+		// capsule rain
+		Capsule newCapsule = this.rain.rain(delta);
+		if (newCapsule != null) {
+			this.spawn(newCapsule);
 		}
 	}
 	
