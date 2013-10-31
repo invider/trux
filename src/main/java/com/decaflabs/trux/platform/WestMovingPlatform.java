@@ -5,7 +5,7 @@ package com.decaflabs.trux.platform;
  */
 public class WestMovingPlatform extends AbstractTrux {
 
-	private static final double SPEED = 0.5d;
+	private static final double SPEED = 5d;
 	
 	public WestMovingPlatform(int team, double x) {
 		super(team);

@@ -20,6 +20,8 @@ public class Geo {
 	private double length;
 
 	private Rain rain;
+	
+	private String status = "Updating Status...";
 
 	private Set<Platform> platforms = new HashSet<Platform>();
 
@@ -109,21 +111,22 @@ public class Geo {
 	public String toJSON() {
 		StringBuilder buf = new StringBuilder("");
 		buf.append("{\n");
-
+		
+		buf.append("\"length\": \"").append(this.length).append("\",\n");
+		buf.append("\"status\": \"").append(this.status).append("\",\n");
+		
 		int i = 0;
 		buf.append("\"platforms\": [\n");
 		for (Platform platform : this.platforms) {
 			if (platform instanceof Capsule
 					&& ((Capsule) platform).isCaptured())
 				continue;
-			if (i < platforms.size() - 1) {
-				buf.append(platform.toJSON()).append(",\n");
-			} else {
-				buf.append(platform.toJSON()).append("\n");
-			}
+			
+			if (i != 0) buf.append(",\n");
+			buf.append(platform.toJSON());
 			++i;
 		}
-		buf.append("]\n");
+		buf.append("\n]\n");
 
 		int j = 0;
 		for (Site site : this.sites) {

@@ -13,9 +13,14 @@
         var fps = 0;
         var frameCounter = 0;
         var frameSampleTime = 0;
-        var lastFrame = Date.now();    
-        var posx = 0, posy = 0;
-        var speed = 40;
+        var lastFrame = Date.now();
+            
+        var posx = 0; // window position
+        var speed = 10; // how fast window moves
+        
+        var state;
+        var screenWidth = 1000;
+        var geoLength = 1000;
     
         function init() {
             load();
@@ -36,12 +41,25 @@
         }
         
         function load() {
+            updateState();
         }
        
         // get state from the server 
         function updateState() {
-            $.get( "json", function( data ) {
-                console.log(data);
+            //$.get( "json", {}, function( json ) {
+            //      console.log("OK");
+            //});
+            
+            $.ajax({
+                url: "json",
+                dataType: "json",
+                success: function(geo) {
+                  state = geo;
+                  geoLength = geo.length;
+                },
+                error: function(jxhr, status, err) {
+                  console.log("Error, status = " + status + ", err = " + err);
+                }
             });
         }
         
@@ -64,16 +82,19 @@
         
         function handle(d) {
 	       if (38 in keysDown) {
-		      posy -= speed * d;
 	       }
 	       if (40 in keysDown) {
-		      posy += speed * d;
 	       }
 	       if (37 in keysDown) {
 		      posx -= speed * d;
+		      if (posx < 0) posx = 0;
 	       }
 	       if (39 in keysDown) {
 		      posx += speed * d;
+		      if (posx + screenWidth > geoLength) {
+		          posx = geoLength - screenWidth;
+		          if (posx < 0) posx = 0;
+		      }
 	       }
         }
         
@@ -102,13 +123,7 @@
     
   <body bgcolor="#000000" onload="init();">
   
-    <canvas id="canvas" width="800" height="600" style="border:2px solid #002040;"></canvas>
-      
-    <audio id="background_player" autoplay loop>
-        <source src="sound/flex_beat.mp3" type="audio/mp3">
-        <source src="sound/flex_beat.ogg"type="audio/ogg">
-        Audio is not supported by your browser!
-    </audio>
+    <canvas id="canvas" width="1000" height="400" style="border:2px solid #002040;"></canvas>
         
   </body>
 </html>
