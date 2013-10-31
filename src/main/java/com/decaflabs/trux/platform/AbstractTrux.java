@@ -19,6 +19,11 @@ public abstract class AbstractTrux extends AbstractPlatform {
 	}
 	
 	@Override
+	public String getType() {
+		return "trux";
+	}
+	
+	@Override
 	public void mutate(double delta) {
 		for (Capsule capsule: this.capsules) {
 			capsule.setX(this.x);

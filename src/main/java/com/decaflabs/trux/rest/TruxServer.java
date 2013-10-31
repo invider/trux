@@ -5,12 +5,17 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
+import com.decaflabs.trux.Geo;
+
 /**
  * Embedded HTTP Server (based on Jetty)
  */
 public class TruxServer implements Runnable {
+	
+	private final Geo geo;
 
-	public TruxServer() {
+	public TruxServer(Geo geo) {
+		this.geo = geo;
 		Thread thread = new Thread(this, "trux-http");
 		thread.start();
 	}
@@ -28,7 +33,7 @@ public class TruxServer implements Runnable {
 
 			HandlerList handlers = new HandlerList();
 			handlers.setHandlers(new Handler[] { resource_handler,
-					new HelloHandler() });
+					new StateHandler(this.geo) });
 			server.setHandler(handlers);
 
 			server.start();

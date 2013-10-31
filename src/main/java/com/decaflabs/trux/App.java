@@ -10,9 +10,16 @@ public class App {
 		System.out.println("Trux Geo Simulation");
 
 		GeoSample geo = new GeoSample();
+		
+		TruxServer truxServer = new TruxServer(geo);
 
-		TruxServer truxServer = new TruxServer();
-
+		// wait for http to startup
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {}
+		System.out.println("\n\n");
+		
+		// run the simulation
 		double delta = 0;
 		while (true) {
 			double start = System.currentTimeMillis();

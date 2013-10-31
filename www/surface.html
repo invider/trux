@@ -1,8 +1,10 @@
 <html>
  <head>
-    <title>Lander</title>
+    <title>TRUX Surface</title>
      
     <link rel="stylesheet" type="text/css" href="layer.css" />
+
+    <script type="text/javascript" src="jquery.js"></script>
     
 	<script type="text/javascript" src="render.js"></script>    
     
@@ -35,9 +37,17 @@
         
         function load() {
         }
+       
+        // get state from the server 
+        function updateState() {
+            $.get( "json", function( data ) {
+                console.log(data);
+            });
+        }
+        
         
         function update(d) {
-            //posx += 0.1;        
+            updateState();     
         }      
 
         // Handle keyboard controls

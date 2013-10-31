@@ -16,6 +16,11 @@ public abstract class AbstractCapsule extends AbstractPlatform implements Capsul
 	}
 	
 	@Override
+	public String getType() {
+		return "capsule";
+	}
+	
+	@Override
 	public boolean isCaptured() {
 		return host != null;
 	}

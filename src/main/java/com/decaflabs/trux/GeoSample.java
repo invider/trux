@@ -13,7 +13,5 @@ public class GeoSample extends Geo {
 		this.spawn(new WestMovingPlatform(1, this.randomTag()));
 		this.spawn(new StandingPlatform(2, this.randomTag()));
 		this.spawn(new WestMovingPlatform(2, this.randomTag()));
-		this.spawn(new SampleCapsule(this.randomTag()));
-		this.spawn(new SampleCapsule(this.randomTag()));
 	}
 }

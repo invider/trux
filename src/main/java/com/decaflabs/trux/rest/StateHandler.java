@@ -9,15 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
-public class HelloHandler extends AbstractHandler {
+import com.decaflabs.trux.Geo;
+
+public class StateHandler extends AbstractHandler {
+	
+	private final Geo geo;
+	
+	public StateHandler(Geo geo) {
+		this.geo = geo;
+	}
 
 	@Override
 	public void handle(String arg0, Request request, HttpServletRequest arg2,
 			HttpServletResponse response) throws IOException, ServletException {
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/json;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		request.setHandled(true);
-		response.getWriter().println("<h1>Hello World</h1>");
+		
+		// all we need to do is to print the JSON representation of Geo
+		response.getWriter().println(this.geo.toJSON());
 	}
 
 }

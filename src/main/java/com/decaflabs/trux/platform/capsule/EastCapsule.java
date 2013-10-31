@@ -2,10 +2,8 @@ package com.decaflabs.trux.platform.capsule;
 
 public class EastCapsule extends AbstractCapsule {
 	
-	public EastCapsule(double x) {
+	public EastCapsule() {
 		super();
-		this.x = x;
 	}
-	
 
 }

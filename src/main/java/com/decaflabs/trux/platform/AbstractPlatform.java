@@ -19,6 +19,10 @@ public abstract class AbstractPlatform implements Platform {
 		return team;
 	}
 	
+	public String getType() {
+		return "platform";
+	}
+	
 	public double getX() {
 		return x;
 	}
@@ -35,6 +39,18 @@ public abstract class AbstractPlatform implements Platform {
 		this.y = y;
 	}
 	
-	public abstract void mutate(double delta); 
+	public abstract void mutate(double delta);
+	
+	@Override
+	public String toJSON() {
+		StringBuilder buf = new StringBuilder("{");
+		buf.append("  ").append("\n  \"type\": \"").append(this.getType())
+			.append("\",\n  \"team\": \"").append(this.getTeam())
+			.append("\",\n  \"x\": \"").append(this.getX())
+			.append("\",\n  \"y\": \"").append(this.getY())
+			.append("\"\n}");
+			
+		return buf.toString();
+	}
 		
 }
