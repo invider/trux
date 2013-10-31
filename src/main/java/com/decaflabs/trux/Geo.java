@@ -21,6 +21,8 @@ public class Geo {
 
 	private Rain rain;
 	
+	private Quake quake;
+	
 	private String status = "Updating Status...";
 
 	private Set<Platform> platforms = new HashSet<Platform>();
@@ -30,6 +32,7 @@ public class Geo {
 	public Geo(double length) {
 		this.length = length;
 		this.rain = new Rain(length);
+		this.quake = new Quake(length);
 	}
 
 	protected double randomTag() {
@@ -38,6 +41,10 @@ public class Geo {
 
 	protected void spawn(Platform platform) {
 		this.platforms.add(platform);
+	}
+	
+	protected void spawn(Site site) {
+		this.sites.add(site);
 	}
 
 	protected void kill(Platform platform) {
@@ -95,9 +102,15 @@ public class Geo {
 		}
 
 		// capsule rain
-		Capsule newCapsule = this.rain.rain(delta);
+		Capsule newCapsule = this.rain.fall(delta);
 		if (newCapsule != null) {
 			this.spawn(newCapsule);
+		}
+		
+		// quake
+		Site newSite = this.quake.shake(delta);
+		if (newSite != null) {
+			this.spawn(newSite);
 		}
 	}
 
@@ -126,12 +139,16 @@ public class Geo {
 			buf.append(platform.toJSON());
 			++i;
 		}
-		buf.append("\n]\n");
+		buf.append("\n],\n");
 
 		int j = 0;
+		buf.append("\"sites\": [\n");
 		for (Site site : this.sites) {
-			// print site json representation
+			if (j != 0) buf.append(",\n");
+			buf.append(site.toJSON());
+			++j;
 		}
+		buf.append("\n]\n");
 
 		buf.append("}");
 		return buf.toString();

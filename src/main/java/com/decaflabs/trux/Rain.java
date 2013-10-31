@@ -25,15 +25,15 @@ public class Rain {
 		Iterator<Class <? extends AbstractCapsule>> iter = capsuleTypeSet.iterator();
 		System.out.println("=========================");
 		System.out.println("Today is raining:");
-		System.out.println("=========================");
+		System.out.println("-------------------------");
 		while (iter.hasNext()) {
 			System.out.println("capsule: " + iter.next().getSimpleName());
 		}
 		capsuleTypes = capsuleTypeSet.toArray(new Class[capsuleTypeSet.size()]);
-		System.out.println("=========================");
+		System.out.println("=========================\n");
 	}
 
-	public Capsule rain(double delta) {
+	public Capsule fall(double delta) {
 		if (Math.random() < (PROBABILITY * delta)) {
 			return this.createCapsule();
 		}

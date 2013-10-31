@@ -22,12 +22,24 @@ function render(d) {
     
     // surface
     ctx.strokeStyle="#003080"
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 6;
     ctx.beginPath();
     ctx.moveTo(0, c.height - 50);
     ctx.lineTo(c.width, c.height - 50);
     ctx.stroke();
     
+    
+    // draw sites
+    for (var j = 0; j < state.sites.length; j++) {
+        site = state.sites[j];
+        
+        ctx.strokeStyle="#3080A0"
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(site.x - posx, c.height - 52);
+        ctx.lineTo(site.x - posx + parseFloat(site.w), c.height - 52);
+        ctx.stroke();
+    }
     
     // draw platform
     for (var i = 0; i < state.platforms.length; i++) {
