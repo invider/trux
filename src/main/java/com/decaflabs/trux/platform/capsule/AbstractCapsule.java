@@ -37,6 +37,8 @@ public abstract class AbstractCapsule extends AbstractPlatform implements Capsul
 	
 	@Override
 	public void release() {
+		this.x = this.host.getX();
+		this.y = this.host.getY();
 		this.host = null;
 	}
 

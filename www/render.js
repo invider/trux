@@ -56,7 +56,15 @@ function render(d) {
                ctx.drawImage(imgDCapsule,platform.x - posx, c.height -90 - platform.y);
            } else {
                ctx.drawImage(imgCapsule,platform.x - posx, c.height -90 - platform.y);
-           }
+           }           
+           if (showLabels == true) {
+    	   		ctx.strokeStyle = "#FFFF00";
+    			ctx.lineWidth = 1;
+    			ctx.font = '12px san-serif';
+    			ctx.textBaseline = 'bottom';
+    			ctx.strokeText(platform.label, platform.x - posx + 30, c.height - 80 - platform.y);
+    	   }
+           
        } else {
            if (platform.team == 1) {
                ctx.drawImage(imgRedTrux,platform.x - posx, c.height -90 - platform.y);
@@ -66,6 +74,15 @@ function render(d) {
                ctx.fillStyle="#FFFFFF"
                ctx.fillRect(platform.x - posx, c.height - 90 - platform.y, 40, 20)  
            }
+           
+    	   if (showLabels == true) {
+    	   		ctx.strokeStyle = "#FFFF00";
+    			ctx.lineWidth = 1;
+    			ctx.font = '12px san-serif';
+    			ctx.textBaseline = 'bottom';
+    			ctx.strokeText(platform.label, platform.x - posx + 30, c.height - 80 - platform.y);
+    	   }
+    	   
        }
   
     }
