@@ -1,10 +1,14 @@
 package com.decaflabs.trux.site;
 
+import com.decaflabs.trux.Geo;
 import com.decaflabs.trux.platform.AbstractTrux;
+import com.decaflabs.trux.platform.capsule.Capsule;
 
 public abstract class AbstractSite implements Site {
 	
 	protected final static double DEFAULT_WIDTH = 40;
+	
+	protected Geo geo;
 	
 	protected int team;
 	
@@ -21,10 +25,20 @@ public abstract class AbstractSite implements Site {
 	public void setTeam(int team) {
 		this.team = team;
 	}
+	
+	@Override
+	public void setGeo(Geo geo) {
+		this.geo = geo;
+	}
 
 	@Override
 	public String getType() {
 		return "site";
+	}
+
+	@Override
+	public String soilSample() {
+		return this.getType();
 	}
 
 	@Override
@@ -48,6 +62,10 @@ public abstract class AbstractSite implements Site {
 
 	@Override
 	public void touch(AbstractTrux trux) {		
+	}
+
+	@Override
+	public void touch(Capsule capsule) {	
 	}
 
 	@Override

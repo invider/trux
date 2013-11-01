@@ -46,19 +46,25 @@ function render(d) {
        platform = state.platforms[i];
    
        // avatar
-       if (platform.team == 1) {
-           ctx.fillStyle="#0000FF"
-       } else if (platform.team == 2) {
-           ctx.fillStyle="#FF0000"
-       } else if (platform.team == 3) {
-           ctx.fillStyle="#00FF00"
-       } else if (platform.team == 4) {
-           ctx.fillStyle="#FFFF00"
+       if (platform.type === 'capsule') {
+           if (parseFloat(platform.y) != 0) {
+               ctx.drawImage(imgDCapsule,platform.x - posx, c.height -90 - platform.y);
+           } else {
+               ctx.drawImage(imgCapsule,platform.x - posx, c.height -90 - platform.y);
+           }
        } else {
-           ctx.fillStyle="#FFFFFF"
+           if (platform.team == 1) {
+               ctx.fillStyle="#0000FF"
+               ctx.drawImage(imgRedTrux,platform.x - posx, c.height -90 - platform.y);
+           } else if (platform.team == 2) {
+               ctx.fillStyle="#FF0000"
+               ctx.drawImage(imgBlueTrux,platform.x - posx, c.height - 90 - platform.y);
+           } else {
+               ctx.fillStyle="#FFFFFF"
+               ctx.fillRect(platform.x - posx, c.height - 90 - platform.y, 40, 20)  
+           }
        }
-       
-       ctx.fillRect(platform.x - posx, c.height - 60 - platform.y, 10, 10)    
+  
     }
     
 }

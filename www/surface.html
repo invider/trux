@@ -21,6 +21,8 @@
         var state;
         var screenWidth = 1000;
         var geoLength = 1000;
+        
+        var imgBlueTrux, imgRedTrux, imgDCapsule, imgCapsule;
     
         function init() {
             load();
@@ -41,15 +43,23 @@
         }
         
         function load() {
+            imgRedTrux = new Image();
+            imgRedTrux.src = "img/trux_red.png";
+            imgBlueTrux = new Image();
+            imgBlueTrux.src = "img/trux_blue.png";
+            imgDCapsule = new Image();
+            imgDCapsule.src = "img/capsule.png";
+            imgCapsule = new Image();
+            imgCapsule.src = "img/gcapsule.png";
             updateState();
         }
-       
-        // get state from the server 
+        
+        // get state from the server
         function updateState() {
             //$.get( "json", {}, function( json ) {
             //      console.log("OK");
             //});
-            
+
             $.ajax({
                 url: "json",
                 dataType: "json",
@@ -62,7 +72,6 @@
                 }
             });
         }
-        
         
         function update(d) {
             updateState();     

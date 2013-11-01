@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.decaflabs.trux.platform.capsule.AbstractCapsule;
 import com.decaflabs.trux.platform.capsule.Capsule;
+import com.decaflabs.trux.site.Site;
+import com.decaflabs.trux.site.Surface;
+import com.decaflabs.trux.site.UnknownSurface;
 
 public abstract class AbstractTrux extends AbstractPlatform {
 	
@@ -13,6 +16,8 @@ public abstract class AbstractTrux extends AbstractPlatform {
 	protected List<Capsule> capsules = new LinkedList<Capsule>();
 	
 	protected Capsule released = null;
+	
+	protected Surface over = UnknownSurface.getInstance();
 	
 	public AbstractTrux(int team) {
 		super(team);
@@ -29,6 +34,14 @@ public abstract class AbstractTrux extends AbstractPlatform {
 			capsule.setX(this.x);
 			capsule.setY(this.y);
 		}
+	}
+	
+	public void setOver(Surface surface) {
+		this.over = surface;
+	}
+	
+	public Surface getOver() {
+		return this.over;
 	}
 	
 	public void capture(Capsule capsule) {

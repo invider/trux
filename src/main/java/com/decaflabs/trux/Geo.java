@@ -9,11 +9,12 @@ import com.decaflabs.trux.platform.AbstractTrux;
 import com.decaflabs.trux.platform.Platform;
 import com.decaflabs.trux.platform.capsule.Capsule;
 import com.decaflabs.trux.site.Site;
+import com.decaflabs.trux.site.Surface;
 
 /**
  * Represents the planet surface with all objects
  */
-public class Geo {
+public class Geo implements Surface {
 
 	private static final int LINE_WIDTH = 120;
 
@@ -35,6 +36,11 @@ public class Geo {
 		this.quake = new Quake(length);
 	}
 
+	@Override
+	public String soilSample() {
+		return "geo";
+	}
+
 	protected double randomTag() {
 		return Math.random() * this.length;
 	}
@@ -44,11 +50,16 @@ public class Geo {
 	}
 	
 	protected void spawn(Site site) {
+		site.setGeo(this);
 		this.sites.add(site);
 	}
 
 	protected void kill(Platform platform) {
 		this.platforms.remove(platform);
+	}
+	
+	protected void kill(Site site) {
+		this.sites.remove(site);
 	}
 
 	/**
@@ -64,6 +75,16 @@ public class Geo {
 		}
 		return res;
 	}
+	
+	protected Site selectSite(double x) {
+		for (Site site: this.sites) {
+			if (site.getX() <= x && (site.getX() + site.getWidth()) >= x) {
+				// site is under x
+				return site;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * up
@@ -71,6 +92,33 @@ public class Geo {
 	 * @param delta
 	 */
 	public void mutate(double delta) {
+		// detect surfaces
+		for (Platform p : this.platforms) {
+			Site site = selectSite(p.getX());
+			if (p instanceof AbstractTrux) {
+				AbstractTrux trux = (AbstractTrux) p;
+				if (site == null) {
+					// we are over geo
+					trux.setOver(this);
+				} else {
+					// we are over some site
+					Surface prevSurface = trux.getOver();
+					if (prevSurface != site) {
+						// just touched the site
+						trux.setOver(site);
+						site.touch(trux);
+					}
+				}
+			} else if (p instanceof Capsule){
+				Capsule c = (Capsule) p;
+				if (site != null && c.getY() == 0 && c.getTeam() != 0 && !c.isCaptured()) {
+					// touch only if capsule is dropped, captured and released by a trux
+					site.touch(c);
+				}
+			}
+		}
+		
+		// move platforms
 		for (Platform p : this.platforms) {
 			p.mutate(delta);
 		}
