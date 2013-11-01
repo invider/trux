@@ -6,7 +6,7 @@ public class RedTrux extends AbstractTrux {
 
 	private static final int TEAM = 1;
 	
-	private static final double SPEED = 10d;
+	private static final double SPEED = 20d;
 	
 	private int NAPRAVLENIE = 0; // 0 - Stop, -1 west, +1 east
 	
