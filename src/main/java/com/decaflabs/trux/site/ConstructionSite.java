@@ -34,10 +34,12 @@ public class ConstructionSite extends AbstractSite {
 	@Override
 	public void touch(Capsule capsule) {
 		// capsule is over
+		System.out.println("capsule is over!");
 		if (capsule instanceof SmartDustCapsule) {
 			// build !!!
 			this.upgrade++;
 			this.geo.kill(capsule);
+			System.out.println("upgrade!");	
 		}
 	}
 

@@ -33,6 +33,7 @@ public abstract class AbstractCapsule extends AbstractPlatform implements Capsul
 	@Override
 	public void setHost(Platform platform) {
 		this.host = platform;
+		this.team = platform.getTeam();
 	}
 	
 	@Override

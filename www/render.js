@@ -35,15 +35,15 @@ function render(d) {
         
         if (site.type === "construction") {
         	ctx.strokeStyle="#AAAA00"
-        } else {
-        	ctx.strokeStyle="#3080A0"
-        }
+        	ctx.lineWidth = 3;
+        	ctx.beginPath();
+        	ctx.moveTo(site.x - posx, c.height - 52);
+        	ctx.lineTo(site.x - posx + parseFloat(site.w), c.height - 52);
+        	ctx.stroke();
+        } else {        
+        	ctx.drawImage(imgBuilding, site.x - posx, c.height - 170);
+        }        
         
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(site.x - posx, c.height - 52);
-        ctx.lineTo(site.x - posx + parseFloat(site.w), c.height - 52);
-        ctx.stroke();
     }
     
     // draw platform

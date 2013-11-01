@@ -29,8 +29,10 @@ public class Geo implements Surface {
 	private String status = "Updating Status...";
 
 	private Set<Platform> platforms = new HashSet<Platform>();
+	private Set<Platform> platformsToKill = new HashSet<Platform>();
 
 	private Set<Site> sites = new HashSet<Site>();
+	private Set<Site> sitesToKill = new HashSet<Site>();
 
 	public Geo(double length) {
 		this.length = length;
@@ -57,11 +59,11 @@ public class Geo implements Surface {
 	}
 
 	public void kill(Platform platform) {
-		this.platforms.remove(platform);
+		this.platformsToKill.add(platform);
 	}
 	
 	public void kill(Site site) {
-		this.sites.remove(site);
+		this.sitesToKill.add(site);
 	}
 
 	/**
@@ -78,9 +80,9 @@ public class Geo implements Surface {
 		return res;
 	}
 	
-	protected Site selectSite(double x) {
+	protected Site selectSite(double x, double w) {
 		for (Site site: this.sites) {
-			if (site.getX() <= x && (site.getX() + site.getWidth()) >= x) {
+			if (site.getX() + w <= x && (site.getX() + site.getWidth() - w) >= x) {
 				// site is under x
 				return site;
 			}
@@ -96,7 +98,7 @@ public class Geo implements Surface {
 	public void mutate(double delta) {
 		// detect surfaces
 		for (Platform p : this.platforms) {
-			Site site = selectSite(p.getX());
+			Site site = selectSite(p.getX(), 15);
 			if (p instanceof AbstractTrux) {
 				AbstractTrux trux = (AbstractTrux) p;
 				if (site == null) {
@@ -163,6 +165,10 @@ public class Geo implements Surface {
 		if (newSite != null) {
 			this.spawn(newSite);
 		}
+		
+		// kill sites and platforms
+		this.platforms.removeAll(this.platformsToKill);
+		this.sites.removeAll(this.sitesToKill);
 	}
 
 	/**
