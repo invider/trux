@@ -39,4 +39,9 @@ public class WestMovingPlatform extends AbstractTrux {
 		}
 	}
 
+	@Override
+	public String getLabel() {
+		return "moving west, captured: " + this.capsules.size();
+	}
+
 }

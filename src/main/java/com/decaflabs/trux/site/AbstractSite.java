@@ -67,12 +67,18 @@ public abstract class AbstractSite implements Site {
 	@Override
 	public void touch(Capsule capsule) {	
 	}
+	
+	@Override
+	public String getLabel() {
+		return "site";
+	}
 
 	@Override
 	public String toJSON() {
 		StringBuilder buf = new StringBuilder("{");
 		buf.append("  ").append("\n  \"type\": \"").append(this.getType())
 			.append("\",\n  \"team\": \"").append(this.getTeam())
+			.append("\",\n  \"label\": \"").append(this.getLabel())
 			.append("\",\n  \"x\": \"").append(this.getX())
 			.append("\",\n  \"w\": \"").append(this.getWidth())
 			.append("\"\n}");

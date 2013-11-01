@@ -31,6 +31,8 @@ public interface Site extends Surface {
 	
 	public void mutate(double delta);
 	
+	public String getLabel();
+	
 	public String toJSON();
 
 }

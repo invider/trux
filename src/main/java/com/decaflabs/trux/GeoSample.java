@@ -1,9 +1,7 @@
 package com.decaflabs.trux;
 
-import com.decaflabs.trux.platform.StandingPlatform;
 import com.decaflabs.trux.platform.WestMovingPlatform;
 import com.decaflabs.trux.platform.capsule.AbstractCapsule;
-import com.decaflabs.trux.platform.capsule.SampleCapsule;
 
 public class GeoSample extends Geo {
 

@@ -40,5 +40,10 @@ public class ConstructionSite extends AbstractSite {
 			this.geo.kill(capsule);
 		}
 	}
+
+	@Override
+	public String getLabel() {
+		return "waiting for smart dust...";
+	}
 	
 }
