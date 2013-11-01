@@ -7,6 +7,9 @@ import java.util.Map;
 
 import com.decaflabs.trux.Geo;
 import com.decaflabs.trux.platform.capsule.Capsule;
+import com.decaflabs.trux.site.Site;
+import com.decaflabs.trux.site.Surface;
+import com.decaflabs.trux.site.UnknownSurface;
 
 public abstract class AbstractTrux extends AbstractPlatform {
 	
@@ -38,8 +41,17 @@ public abstract class AbstractTrux extends AbstractPlatform {
 	
 	private Map<Platform, Distance> prevDistanceTo = new HashMap<Platform, Distance>();
 	
+	protected Capsule released = null;
+	
+	protected Surface over = UnknownSurface.getInstance();
+	
 	public AbstractTrux(int team) {
 		super(team);
+	}
+	
+	@Override
+	public String getType() {
+		return "trux";
 	}
 	
 	@Override
@@ -50,13 +62,23 @@ public abstract class AbstractTrux extends AbstractPlatform {
 		}
 	}
 	
-	public void capture(Capsule capsule) {		
+	public void setOver(Surface surface) {
+		this.over = surface;
+	}
+	
+	public Surface getOver() {
+		return this.over;
+	}
+	
+	public void capture(Capsule capsule) {
+		if (this.released == capsule) return; // ignore previously released capsule
 		this.capsules.add(capsule);
 		capsule.setHost(this);
 	}
 	
 	public void release(Capsule capsule) {
 		if (this.capsules.remove(capsule)) {
+			this.released = capsule;
 			capsule.release();
 			Geo.getInstance().drop(capsule);
 		}

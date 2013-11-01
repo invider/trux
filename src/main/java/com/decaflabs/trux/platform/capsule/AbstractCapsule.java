@@ -5,14 +5,19 @@ import com.decaflabs.trux.platform.Platform;
 
 public abstract class AbstractCapsule extends AbstractPlatform implements Capsule {
 	
-	protected static final double CLOUD_Y = 20;
+	protected static final double CLOUD_Y = 600;
 
-	protected static final double SPEED = 5;
+	protected static final double SPEED = 20;
 	
 	protected Platform host = null;
 	
 	public AbstractCapsule() {
 		this.y = CLOUD_Y;
+	}
+	
+	@Override
+	public String getType() {
+		return "capsule";
 	}
 	
 	@Override
