@@ -18,7 +18,7 @@ function render(d) {
     ctx.lineWidth = 1;
     ctx.font = '14px san-serif';
     ctx.textBaseline = 'bottom';
-    ctx.strokeText(state.status, 70, 40);
+    ctx.strokeText(state.status, 80, 40);
     
     // surface
     ctx.strokeStyle="#003080"
