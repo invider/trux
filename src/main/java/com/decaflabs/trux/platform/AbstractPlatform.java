@@ -42,10 +42,16 @@ public abstract class AbstractPlatform implements Platform {
 	public abstract void mutate(double delta);
 	
 	@Override
+	public String getLabel() {
+		return "";
+	}
+	
+	@Override
 	public String toJSON() {
 		StringBuilder buf = new StringBuilder("{");
 		buf.append("  ").append("\n  \"type\": \"").append(this.getType())
 			.append("\",\n  \"team\": \"").append(this.getTeam())
+			.append("\",\n  \"label\": \"").append(this.getLabel())
 			.append("\",\n  \"x\": \"").append(this.getX())
 			.append("\",\n  \"y\": \"").append(this.getY())
 			.append("\"\n}");

@@ -14,6 +14,8 @@ public interface Platform {
 	
 	public void mutate(double delta);
 	
+	public String getLabel();
+	
 	public String toJSON();
 	
 }

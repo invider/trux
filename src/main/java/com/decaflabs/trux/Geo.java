@@ -17,6 +17,8 @@ import com.decaflabs.trux.site.Surface;
 public class Geo implements Surface {
 
 	private static final int LINE_WIDTH = 120;
+	
+	public static final String GEO = "geo";
 
 	private double length;
 
@@ -38,27 +40,27 @@ public class Geo implements Surface {
 
 	@Override
 	public String soilSample() {
-		return "geo";
+		return GEO;
 	}
 
 	protected double randomTag() {
 		return Math.random() * this.length;
 	}
 
-	protected void spawn(Platform platform) {
+	public void spawn(Platform platform) {
 		this.platforms.add(platform);
 	}
 	
-	protected void spawn(Site site) {
+	public void spawn(Site site) {
 		site.setGeo(this);
 		this.sites.add(site);
 	}
 
-	protected void kill(Platform platform) {
+	public void kill(Platform platform) {
 		this.platforms.remove(platform);
 	}
 	
-	protected void kill(Site site) {
+	public void kill(Site site) {
 		this.sites.remove(site);
 	}
 
@@ -136,7 +138,8 @@ public class Geo implements Surface {
 				for (Platform c : this.platforms) {
 					if (c instanceof Capsule) {
 						Capsule capsule = (Capsule) c;
-						if (capsule.getY() == 0
+						if (!capsule.isCaptured()
+								&& capsule.getY() == 0
 								&& trux.getX() - AbstractTrux.TRUX_WIDTH <= capsule
 										.getX()
 								&& trux.getX() + AbstractTrux.TRUX_WIDTH >= capsule

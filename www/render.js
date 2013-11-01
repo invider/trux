@@ -33,7 +33,12 @@ function render(d) {
     for (var j = 0; j < state.sites.length; j++) {
         site = state.sites[j];
         
-        ctx.strokeStyle="#3080A0"
+        if (site.type === "construction") {
+        	ctx.strokeStyle="#AAAA00"
+        } else {
+        	ctx.strokeStyle="#3080A0"
+        }
+        
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(site.x - posx, c.height - 52);
@@ -54,10 +59,8 @@ function render(d) {
            }
        } else {
            if (platform.team == 1) {
-               ctx.fillStyle="#0000FF"
                ctx.drawImage(imgRedTrux,platform.x - posx, c.height -90 - platform.y);
            } else if (platform.team == 2) {
-               ctx.fillStyle="#FF0000"
                ctx.drawImage(imgBlueTrux,platform.x - posx, c.height - 90 - platform.y);
            } else {
                ctx.fillStyle="#FFFFFF"

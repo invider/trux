@@ -50,7 +50,7 @@ public abstract class AbstractTrux extends AbstractPlatform {
 		capsule.setHost(this);
 	}
 	
-	public void release(AbstractCapsule capsule) {
+	public void release(Capsule capsule) {
 		if (this.capsules.remove(capsule)) {
 			this.released = capsule;
 			capsule.release();
